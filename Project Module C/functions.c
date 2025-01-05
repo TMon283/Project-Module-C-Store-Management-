@@ -128,7 +128,7 @@ void loadCategoryFromFile(int numberOfCategory, struct Category category[]){
 	}
 	numberOfCategory = fread(category, sizeof(struct Category), 100, file);
     if(numberOfCategory == 0){
-        printf("No data found...\n");
+        printf("No data found\n");
     }else{
         printf("\nLoaded %d categories from file\n", numberOfCategory);
     }
@@ -402,6 +402,14 @@ void backOrExit(){
 }
 
 int isValidName(char input[]){
+    int hasNoSpace = 0;
+    for(int i = 0; i < strlen(input); i++){
+        if(!isspace(input[i])){
+            hasNoSpace = 1;
+            break;
+        }
+    }
+    if(!hasNoSpace) return 0;
     for(int i = 0; i < strlen(input); i++){
         if(!isalpha(input[i]) && input[i] != ' '){
             return 0;
@@ -419,7 +427,7 @@ void validateIdInput(int *input){
         getchar();
         if(isNumber(buffer)){
             *input = atoi(buffer);
-            if (*input >= 0){
+            if (*input > 0){
                 isValid = 1;
             }else{
                 printf("\tError: Invalid Input\n");
