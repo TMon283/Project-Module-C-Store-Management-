@@ -694,12 +694,12 @@ void searchProduct(int *numberOfProduct, struct Product product[]){
         searchName[strcspn(searchName, "\n")] = '\0';
         int found = 0;
         printf("\n\tSearch Results:\n");
-        printf("+----------+------------+------------------+----------+---------+\n");
-        printf("| Prod. ID | Categ. ID  |       Name       | Quantity |  Price  |\n");
-        printf("+----------+------------+------------------+----------+---------+\n");
+        printf("+----------+------------+------------------+----------+------------+\n");
+   		printf("| Prod. ID | Categ. ID  |       Name       | Quantity |   Price    |\n");
+    	printf("+----------+------------+------------------+----------+------------+\n");
         for(int i = 0; i < *numberOfProduct; i++){
             if(strstr(product[i].productName, searchName) != NULL){
-                printf("| %-8d | %-10d | %-16s | %-8d | %7.2f |\n",
+                printf("| %-8d | %-10d | %-16s | %-8d | %10.1f |\n",
                     product[i].productId,
                     product[i].categoryId,
                     product[i].productName,
