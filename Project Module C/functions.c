@@ -77,14 +77,14 @@ void addCategory(int *length, struct Category category[]){
     for (int i = *length; i < (*length + numberOfCategory); i++){
         printf("\t============================\n");    
         int isValid = 0;
-        while (!isValid){
+        while(!isValid){
             char buffer[100];
             printf("\tCategory ID: ");
             scanf("%s", buffer);
             getchar();
             if(isNumber(buffer)){
                 category[i].categoryId = atoi(buffer);
-                if(category[i].categoryId >= 0){
+                if (category[i].categoryId >= 0) {
                     if (checkCategoryId(category[i].categoryId)){
                         isValid = 1;
                     }else{
@@ -146,13 +146,14 @@ void loadCategoryFromFile(int numberOfCategory, struct Category category[]){
 }
 
 void editCategory(int *numberOfCategory, struct Category category[]){
+	loadCategoryFromFile(*numberOfCategory, category);
 	FILE *file = fopen("CategoryData.dat", "rb+");
 	if(file == NULL){
 		printf("Error opening file\n");
 		return;
 	}
 	*numberOfCategory = fread(category, sizeof(struct Category), 100, file);
-	printf("\n***Store Management System Using C***\n\n");
+	printf("\n\t***Store Management System Using C***\n\n");
 	printf("\t           EDIT CATEGORY\n");
 	printf("\t===================================\n");
 	printf("\t+---------------------------------+\n");
@@ -285,7 +286,7 @@ void searchCategory(int *numberOfCategory, struct Category category[]){
     	if(strstr(category[i].categoryName, categoryName) != NULL){
         	findIndex = i;
     	}
-    }
+	}
     if(findIndex == -1){
         printf("\tError: This Category Name doesn't exist\n");
     }else{
@@ -427,7 +428,7 @@ void validateIdInput(int *input){
         getchar();
         if(isNumber(buffer)){
             *input = atoi(buffer);
-            if (*input >= 0){
+            if (*input > 0){
                 isValid = 1;
             }else{
                 printf("\tError: Invalid Input\n");
@@ -885,5 +886,4 @@ void editProduct(int *numberOfProduct, struct Product product[]){
     fclose(file);
     backOrExit();
 }
-
 
