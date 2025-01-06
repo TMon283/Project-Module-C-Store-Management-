@@ -176,7 +176,7 @@ void editCategory(int *numberOfCategory, struct Category category[]){
 		printf("\tInput New Category Name: ");
 		fgets(category[findIndex].categoryName, sizeof(category[findIndex].categoryName), stdin);
 		category[findIndex].categoryName[strcspn(category[findIndex].categoryName, "\n")] = '\0';
-		fseek(file, findIndex * sizeof(struct Category), SEEK_SET); // seek_set: hang so xac dinh vi tri can di chuyen den tinh tu dau file
+		fseek(file, findIndex * sizeof(struct Category), SEEK_SET);
 		fwrite(&category[findIndex], sizeof(struct Category), 1, file);
 		printf("\tEditing Success\n");
 	}
@@ -428,7 +428,7 @@ void validateIdInput(int *input){
         getchar();
         if(isNumber(buffer)){
             *input = atoi(buffer);
-            if (*input > 0){
+            if (*input >= 0){
                 isValid = 1;
             }else{
                 printf("\tError: Invalid Input\n");
@@ -526,7 +526,7 @@ void addProduct(int *length, struct Product product[]){
             fgets(buffer, sizeof(buffer), stdin);
             buffer[strcspn(buffer, "\n")] = '\0';
             float tempPrice;
-            if(sscanf(buffer, "%f", &tempPrice) == 1){ //sscanf: tra ve so luong cac bien da duoc gan gia tri thanh cong
+            if(sscanf(buffer, "%f", &tempPrice) == 1){
                 if(tempPrice >= 0){
                     product[i].price = tempPrice;
                     isValid = 1;
@@ -581,7 +581,7 @@ void displayProduct(int numberOfProduct, struct Product product[]){
     printf("| Prod. ID | Categ. ID  |       Name       | Quantity |   Price    |\n");
     printf("+----------+------------+------------------+----------+------------+\n");
     for(int i = 0; i < numberOfProduct; i++){
-        printf("| %-8d | %-10d | %-16s | %-8d | %10.2f |\n", 
+        printf("| %-8d | %-10d | %-16s | %-8d | %10.1f |\n", 
             product[i].productId, 
             product[i].categoryId,
             product[i].productName,
@@ -671,16 +671,16 @@ void searchProduct(int *numberOfProduct, struct Product product[]){
         for(int i = 0; i < *numberOfProduct; i++){
             if(product[i].productId == productId){
                 printf("\n\tProduct Found:\n");
-                printf("+----------+------------+------------------+----------+----------+\n");
-                printf("| Prod. ID | Categ. ID  |       Name       | Quantity |  Price   |\n");
-                printf("+----------+------------+------------------+----------+----------+\n");
-                printf("| %-8d | %-10d | %-16s | %-8d | %8.2f |\n",
+    			printf("+----------+------------+------------------+----------+------------+\n");
+   				printf("| Prod. ID | Categ. ID  |       Name       | Quantity |   Price    |\n");
+    			printf("+----------+------------+------------------+----------+------------+\n");
+                printf("| %-8d | %-10d | %-16s | %-8d | %10.1f |\n",
                     product[i].productId,
                     product[i].categoryId,
                     product[i].productName,
                     product[i].quantity,
                     product[i].price);
-                printf("+----------+------------+------------------+----------+----------+\n");
+                printf("+----------+------------+------------------+----------+------------+\n");
                 found = 1;
                 break;
             }
