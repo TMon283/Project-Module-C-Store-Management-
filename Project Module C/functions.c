@@ -84,7 +84,7 @@ void addCategory(int *length, struct Category category[]){
             getchar();
             if(isNumber(buffer)){
                 category[i].categoryId = atoi(buffer);
-                if (category[i].categoryId >= 0) {
+                if(category[i].categoryId >= 0){
                     if (checkCategoryId(category[i].categoryId)){
                         isValid = 1;
                     }else{
@@ -285,7 +285,7 @@ void searchCategory(int *numberOfCategory, struct Category category[]){
     	if(strstr(category[i].categoryName, categoryName) != NULL){
         	findIndex = i;
     	}
-	}
+    }
     if(findIndex == -1){
         printf("\tError: This Category Name doesn't exist\n");
     }else{
@@ -427,7 +427,7 @@ void validateIdInput(int *input){
         getchar();
         if(isNumber(buffer)){
             *input = atoi(buffer);
-            if (*input > 0){
+            if (*input >= 0){
                 isValid = 1;
             }else{
                 printf("\tError: Invalid Input\n");
